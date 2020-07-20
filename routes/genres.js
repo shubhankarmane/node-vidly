@@ -6,7 +6,7 @@ const Joi = require('joi');
 // Connect to mongodb
 const mongoose = require('mongoose');
 
-// Defining schema
+// Defining schema for a genre
 const Genre = mongoose.model('Genre', 
     new mongoose.Schema({
         genre: {
@@ -42,7 +42,9 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-    const genre = await Genre.findById(req.params.id);
+    const genre = await Genre.findById(req.params.id).catch(err => {
+        res.status(404).send('Doesn\'t exist');
+    });
 
     if(!genre) {
         return res.status(400).send('Bad Request, Invalid ID');
