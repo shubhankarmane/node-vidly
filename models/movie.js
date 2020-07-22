@@ -20,7 +20,8 @@ const Movie = mongoose.model('Movie', new mongoose.Schema({
     },
     dailyRentalRate: {
         type: Number,
-        min: 10
+        min: 10,
+        required: true
     },
     genre: {
         type: genreSchema,
