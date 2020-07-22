@@ -5,14 +5,14 @@ const mongoose = require('mongoose');
 const Joi = require('joi');
 
 // Defining schema for a genre
-const Genre = mongoose.model('Genre', 
-    new mongoose.Schema({
-        genre: {
-            type: String,
-            required: true,
-        }
+const genreSchema = new mongoose.Schema({
+    genre: {
+        type: String,
+        required: true,
     }
-));
+});
+
+const Genre = mongoose.model('Genre', genreSchema);
 
 function validateGenre(genre) {
     //Joi verification of the request body
@@ -25,3 +25,4 @@ function validateGenre(genre) {
 
 exports.Genre = Genre;
 exports.validateGenre = validateGenre;
+exports.genreSchema = genreSchema;
