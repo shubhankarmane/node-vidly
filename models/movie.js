@@ -35,7 +35,7 @@ function validateMovie(movie) {
         title: Joi.string().required(),
         numberInStock: Joi.number().required(),
         dailyRentalRate: Joi.number().required(),
-        genreID: Joi.string().required(),
+        genreID: Joi.objectId().required(),
     });
     return schema.validate(movie); 
 }

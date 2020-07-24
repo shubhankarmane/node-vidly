@@ -6,7 +6,7 @@ const {Genre} = require('../models/genre');
 // For POST requests
 router.post('/', async(req, res) => {
     const validationResult = validateMovie(req.body);
-    if(validationResult.error) return res.status(400).send('error in validating movie');
+    if(validationResult.error) return res.status(400).send(validationResult.error.details[0].message);
 
     const getgenre = await Genre.findById(req.body.genreID);
     if(!getgenre) return res.status(400).send('No Genre Found');

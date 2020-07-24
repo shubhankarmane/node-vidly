@@ -4,6 +4,8 @@ const genres = require('./routes/genres');
 const customers = require('./routes/customers');
 const movies = require('./routes/movies');
 const rentals = require('./routes/rentals');
+const Joi = require('Joi');
+Joi.objectId = require('joi-objectid')(Joi);
 
 // Connecting to mongodb once for the lifetime of the application
 const mongoose = require('mongoose');
