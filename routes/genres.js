@@ -31,7 +31,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     const validationResult = validateGenre(req.body);
 
-    if(validationResult.error) return res.status(400).send('Genre is invalid.');
+    if(validationResult.error) return res.status(400).send(validationResult.error.details[0].message);
     
     // Saving the genre to the server and returning the genre to the requester
     let addGenre = new Genre({
