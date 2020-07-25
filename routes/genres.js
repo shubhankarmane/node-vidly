@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const {Genre, validateGenre} = require('../models/genre');
+const auth = require('../middleware/auth');
+const admin = require('../middleware/admin');
 
 // for GET requests
 router.get('/', async (req, res) => {
@@ -28,7 +30,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // For POST requests
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
     const validationResult = validateGenre(req.body);
 
     if(validationResult.error) return res.status(400).send(validationResult.error.details[0].message);
@@ -42,7 +44,7 @@ router.post('/', async (req, res) => {
 });
 
 // For DELETE requests
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', [auth, admin], async (req, res) => {
     // We do not verify if the object exists on the db, we delete it first using the id
     const genre = await Genre.findByIdAndRemove(req.params.id);
 
@@ -52,7 +54,7 @@ router.delete('/:id', async (req, res) => {
 });
 
 // For PUT requests
-router.put('/:id', async (req, res) => {
+router.put('/:id', auth, async (req, res) => {
     const validatationResult = validateGenre(req.body);
 
     if(validatationResult.error) return res.status(400).send('Invalid data received.');

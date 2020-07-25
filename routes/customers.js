@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const {Customer, validateCustomer} = require('../models/customer');
+const auth = require('../middleware/auth');
 
 // For POST requests
-router.post('/', async(req, res) => {
+router.post('/', auth, async(req, res) => {
     const validationResult = validateCustomer(req.body);
 
     // if the joi validation fails, then send an error
@@ -37,7 +38,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // For PUT requests
-router.put('/:id', async(req, res) => {
+router.put('/:id', auth, async(req, res) => {
     const validationResult = validateCustomer(req.body);
 
     // if the joi validation fails, then send an error
@@ -56,7 +57,7 @@ router.put('/:id', async(req, res) => {
 })
 
 // For DELETE requests
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
     // We do not verify if the object exists on the db, we delete it first using the id
     const customer = await Customer.findByIdAndRemove(req.params.id);
 

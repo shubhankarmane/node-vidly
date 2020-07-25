@@ -1,3 +1,4 @@
+const config = require('config');
 const express = require('express');
 const app = express();
 const genres = require('./routes/genres');
@@ -8,6 +9,11 @@ const users = require('./routes/users');
 const auth = require('./routes/auth');
 const Joi = require('Joi');
 Joi.objectId = require('joi-objectid')(Joi);
+
+if (!config.get('jwtPvtKey')) {
+    console.log('Fatal Error: No Auth Key!');
+    process.exit(1);
+}
 
 // Connecting to mongodb once for the lifetime of the application
 const mongoose = require('mongoose');
