@@ -3,7 +3,6 @@ const router = express.Router();
 const {Genre, validateGenre} = require('../models/genre');
 const auth = require('../middleware/auth');
 const admin = require('../middleware/admin');
-const c = require('config');
 
 // for GET requests
 router.get('/', async (req, res, next) => {
