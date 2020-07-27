@@ -36,9 +36,9 @@ router.post('/', auth, async(req, res, next) => {
         });
         // Using fawn to simulate 2 phase commit as mongodb does not support transaction 
         try {
-            new Fawn.Task().save('rentals', rental).update('movies', { _id: movie._id }, {
-                $inc: { numberInStock: -1 }
-            }).run();
+            new Fawn.Task().save('rentals', rental).update('movies', 
+            { _id: movie._id }, 
+            { $inc: { numberInStock: -1 } } ).run();
             res.send(rental);
         }
         catch(ex) {
