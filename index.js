@@ -6,7 +6,7 @@ Joi.objectId = require('joi-objectid')(Joi);
 require('./startup/routes')(app);
 require('./startup/database')();
 require('./startup/configKey')();
-require('./startup/prod')();
+// require('./startup/prod')();
 // Handling errors that are outside the scope of express 
 // (errors other than those that occur when handling routes) 
 process.on('uncaughtException', (ex) => {
