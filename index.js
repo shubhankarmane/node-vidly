@@ -1,7 +1,7 @@
 const winston = require('winston');
 const express = require('express');
 const app = express();
-const Joi = require('Joi');
+const Joi = require('joi');
 Joi.objectId = require('joi-objectid')(Joi);
 require('./startup/routes')(app);
 require('./startup/database')();
