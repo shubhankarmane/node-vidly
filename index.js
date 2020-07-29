@@ -6,7 +6,7 @@ Joi.objectId = require('joi-objectid')(Joi);
 require('./startup/routes')(app);
 require('./startup/database')();
 require('./startup/configKey')();
-
+require('./startup/prod')
 // Handling errors that are outside the scope of express 
 // (errors other than those that occur when handling routes) 
 process.on('uncaughtException', (ex) => {
@@ -15,6 +15,7 @@ process.on('uncaughtException', (ex) => {
 })
 winston.add(new winston.transports.File({ filename: 'logfile.log' }));
 
-app.listen(3000, () => {
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
     console.log('Listening on server: localhost:3000/...')
 });
