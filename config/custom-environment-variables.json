@@ -1,3 +1,4 @@
 {
-    "jwtPvtKey": "vidly-jwtPrivateKey"
+    "jwtPvtKey": "vidly-jwtPrivateKey",
+    "password": "password"
 }

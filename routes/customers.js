@@ -23,7 +23,7 @@ router.post('/', auth, async(req, res, next) => {
 });
 
 // For GET requests
-router.get('/', async(req, res, next) => {
+router.get('/', auth, async(req, res, next) => {
     try {
         const customers = await Customer.find();
         if(customers)  return res.status(200).send(customers);
@@ -34,7 +34,7 @@ router.get('/', async(req, res, next) => {
     }
 });
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', auth, async (req, res, next) => {
     try {
         const customer = await Customer.findById(req.params.id);
         if(!customer) return res.status(404).send('Couldn\'t find customer!');
